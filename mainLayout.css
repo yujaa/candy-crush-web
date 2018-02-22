@@ -1,0 +1,95 @@
+/* Copyright (c) 2017 MIT 6.813/6.831 course staff, all rights reserved.
+ * Redistribution of original or derived work requires permission of course staff.
+ */
+
+/* REMOVE ME - dashed lines and height for debugging */
+/*#mainColumn {
+  outline: 1px dashed orange;
+  height: 200px;
+}
+*/
+/* Your css code here! */
+.col-md-4 {
+	display:inline;
+	padding: 10px 10px;	 /*Should be spacing of at least 10px*/
+	margin: 0 auto;
+}
+
+#game-title {
+	color: red;
+	font-size: 28px;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 100px;
+}
+
+#new-game-btn {
+	display: block;
+	margin: 0 auto;
+	font-weight: bold;
+}
+
+#game-board {
+	height: 320px;
+    width: 320px;
+    margin: 0 auto;
+    
+}
+
+#game-board td{
+	width: 40px;
+	border: 2px solid white;
+	text-align: center;
+	color: white;
+ 	font-weight: bold;
+}
+
+
+#move-input-div{
+	margin-top:70px;
+	text-align: center;
+	font-weight: bolder;
+
+}
+
+#move-input{
+	width: 80px;
+	display: inline;
+}
+
+#arrow-set{
+	position: relative;
+	margin-top: 15px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+#arrow-set input{
+	width: 50px;
+}
+
+#up-arrow{
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 3px;
+}
+
+#left-arrow{
+}
+
+#right-arrow{
+	margin-left: 56px;
+}
+
+#down-arrow{
+	display: block;
+	margin: 0 auto;
+	margin-top: 3px;
+}
+
+#crush-once-btn {
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
+	font-weight: bold;
+}
