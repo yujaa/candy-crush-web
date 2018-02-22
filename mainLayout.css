@@ -68,20 +68,20 @@
 	width: 50px;
 }
 
-#up-arrow{
+#up{
 	display: block;
 	margin: 0 auto;
 	margin-bottom: 3px;
 }
 
-#left-arrow{
+#left{
 }
 
-#right-arrow{
+#right{
 	margin-left: 56px;
 }
 
-#down-arrow{
+#down{
 	display: block;
 	margin: 0 auto;
 	margin-top: 3px;

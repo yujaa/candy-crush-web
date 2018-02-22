@@ -130,7 +130,15 @@ $(board).on('add', function(e, info)
 // move a candy on the board
 $(board).on('move', function(e, info)
 {
-  // Your code here.
+  $('#game-board tr:eq('+info.toRow+') td:eq('+info.toCol+')').css('background-color', info.candy.toString()); 
+  //change the color of the annotation of the cell
+  $("#game-board td").each(function() {
+    if ($(this).css("background-color") == 'rgb(255, 255, 0)' ) 
+      $(this).css('color', 'gray');
+    else
+      $(this).css('color', 'white');
+  });
+
 });
 
 // remove a candy from the board
@@ -152,14 +160,21 @@ $(document).on('click', "#new-game-btn", function(evt)
   console.log("new");
 });
 
-$(document).on('click', "#up-arrow", function(evt)
+$(document).on('click', ".arrow-btn", function(evt)
 {
-  // Your code here.
+
   var cellAnnot = $('#move-input').val();
-  var row = cellAnnot[1];
-  var column= cellAnnot[0].charCodeAt()-"a".charCodeAt();
-  if(rules.isMoveTypeValid(board.getCandyAt(row, column),"up") > 0 ) //if it is vald
-    console.log("up");
+
+  //if move-input is not empty
+  if(cellAnnot !=''){
+    var row = cellAnnot[1];
+    var column= cellAnnot[0].charCodeAt()-"a".charCodeAt();
+    if(rules.isMoveTypeValid(board.getCandyAt(row, column), this.id) > 0 ) //if it is valid
+      board.flipCandies(board.getCandyAt(row, column), board.getCandyInDirection(board.getCandyAt(row, column), this.id));
+  }
+
+  //clear text field
+  $('#move-input').val('');
 });
 
 // keyboard events arrive here
@@ -198,10 +213,10 @@ $(document).on('keydown', function(evt) {
       </div>
 
       <div id= "arrow-set"> 
-        <input class= "btn" id="up-arrow" type="button" value="↑">
-          <input class= "btn" id="left-arrow" type="button" value="←">
-          <input class= "btn" id="right-arrow" type="button" value="→">
-        <input class= "btn" id="down-arrow" type="button" value="↓">
+        <input class= "btn arrow-btn" id="up" type="button" value="↑">
+          <input class= "btn arrow-btn" id="left" type="button" value="←">
+          <input class= "btn arrow-btn" id="right" type="button" value="→">
+        <input class= "btn arrow-btn" id="down" type="button" value="↓">
       </div>
 
       <input class= "btn" id ="crush-once-btn" type="button" value="Crush Once">
