@@ -165,12 +165,28 @@ $(document).on('click', ".arrow-btn", function(evt)
 
   var cellAnnot = $('#move-input').val();
 
-  //if move-input is not empty
-  if(cellAnnot !=''){
-    var row = cellAnnot[1];
-    var column= cellAnnot[0].charCodeAt()-"a".charCodeAt();
-    if(rules.isMoveTypeValid(board.getCandyAt(row, column), this.id) > 0 ) //if it is valid
-      board.flipCandies(board.getCandyAt(row, column), board.getCandyInDirection(board.getCandyAt(row, column), this.id));
+  ////input checking
+  if(cellAnnot !='' && cellAnnot.length ==2){
+  // 2nd input checking
+    var alphabet = /^[a-h]$/;
+    var alphabet_capital = /^[A-H]$/;
+    var number = /^[0-7]$/;
+
+    var annot_alph = cellAnnot[0];
+    var annot_num = cellAnnot[1];
+    //capital
+    if(cellAnnot[0].match(alphabet_capital))
+      annot_alph = String.fromCharCode(cellAnnot[0].charCodeAt()+('a'.charCodeAt()-'A'.charCodeAt()));
+    
+
+    if(annot_alph.match(alphabet)&&annot_num.match(number))
+    {
+      console.log("correct");
+      var row = annot_num;
+      var column= annot_alph.charCodeAt()-"a".charCodeAt();
+      if(rules.isMoveTypeValid(board.getCandyAt(row, column), this.id) > 0 ) //if it is valid
+        board.flipCandies(board.getCandyAt(row, column), board.getCandyInDirection(board.getCandyAt(row, column), this.id));
+    }
   }
 
   //clear text field
