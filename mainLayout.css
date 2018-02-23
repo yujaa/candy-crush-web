@@ -64,9 +64,14 @@
 	white-space: nowrap;
 }
 
-#arrow-set input{
+.arrow-btn{
 	width: 50px;
 }
+
+.arrow-btn:not([disabled]){
+	background:lightgreen;
+}
+
 
 #up{
 	display: block;
