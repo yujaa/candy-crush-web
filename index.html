@@ -71,6 +71,7 @@ var candy;
 
 var annot_alph;
 var annot_num;
+var crushable_len;
 
 // initialize board
 if ($.getUrlVar('size') && $.getUrlVar('size') >= 3) {
@@ -119,7 +120,19 @@ $(document).ready(function()
 // add a candy to the board
 $(board).on('add', function(e, info)
 {
-  // Your code here.
+  console.log(crushable_len);
+  if(crushable_len > 0){
+    //sleep function
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+      if ((new Date().getTime() - start) > 500){
+        break;
+      }
+    }
+    console.log("500ms delay end");
+    crushable_len = 0;
+  }
+  
   $('#game-board tr:eq('+info.toRow+') td:eq('+info.toCol+')').css('background-color', info.candy.toString()); 
 
   //For the yellow candy, textual annotation's color is gray.
@@ -128,6 +141,7 @@ $(board).on('add', function(e, info)
       $(this).css('color', 'gray');
     }
   });
+
 });
 
 // move a candy on the board
@@ -141,13 +155,27 @@ $(board).on('move', function(e, info)
     else
       $(this).css('color', 'white');
   });
+  
 
+  //after move, check if there is candies that can be crushed.
+  if(rules.getCandyCrushes() !=0)
+  {
+    //enable crush-once-btn
+    $('#crush-once-btn').prop('disabled',false);
+    $('.arrow-btn').prop('disabled',true);
+  }
+  else
+  {
+    $('#crush-once-btn').prop('disabled', true);
+  }
 });
 
 // remove a candy from the board
 $(board).on('remove', function(e, info)
 {
-  // Your code here.
+  //There should be 500ms from when the candies are removed, and when the candies are shifted down.
+  rules.moveCandiesDown();
+  //rules.moveCandiesDown();
 });
 
 // move a candy on the board
@@ -159,9 +187,20 @@ $(board).on('scoreUpdate', function(e, info)
 // Button Events
 $(document).on('click', "#new-game-btn", function(evt)
 {
+  board.clear();
   rules.prepareNewGame();
   console.log("new");
 });
+
+$(document).on('click', "#crush-once-btn", function(evt)
+{
+  var crushable = rules.getCandyCrushes();
+  crushable_len = crushable.length;
+
+  if (crushable_len != 0) 
+    rules.removeCrushes(crushable);
+});
+
 
 $(document).on('click', ".arrow-btn", function(evt)
 {
@@ -211,8 +250,10 @@ $(document).on('keyup', function(evt) {
       }
     }
   }
-      
-
+  else
+  {
+    $('.arrow-btn').prop('disabled', true);
+  }
 });
 
 

@@ -72,7 +72,6 @@
 	background:lightgreen;
 }
 
-
 #up{
 	display: block;
 	margin: 0 auto;
@@ -97,4 +96,8 @@
 	margin: 0 auto;
 	margin-top: 20px;
 	font-weight: bold;
+}
+
+#crush-once-btn:not([disabled]){
+	background:lightblue;
 }
