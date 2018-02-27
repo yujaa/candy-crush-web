@@ -218,7 +218,10 @@ $(document).on('click', "#crush-once-btn", function(evt)
   crushable_len = crushable.length;
 
   if (crushable_len != 0) 
+  {
     rules.removeCrushes(crushable);
+    $("#move-input").focus();
+  }
 });
 
 //Button Events with keystrokes
@@ -242,6 +245,7 @@ $(document).on('click', ".arrow-btn", function(evt)
   $('#move-input').val('');
   //disable arrow buttons
   $('.arrow-btn').prop('disabled','true');
+  $("#move-input").focus();
 });
 
 // keyboard events arrive here
@@ -298,7 +302,7 @@ $(document).on('keyup', function(evt) {
   </div>
 
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-4" id="firstColumn">
       <div>
