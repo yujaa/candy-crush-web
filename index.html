@@ -91,8 +91,8 @@ $(document).ready(function()
   // Your code here.
   //make the middle column 50% of the page.
   $('#mainColumn').css('min-width', '50%'); 
-  $('#firstColumn').css('min-width', '150px'); 
-  $('#lastColumn').css('min-width', '150px');
+  $('#firstColumn').css('min-width', '180px'); 
+  $('#lastColumn').css('min-width', '180px');
   $('#firstColumn').css('max-width', '24%'); 
   $('#lastColumn').css('max-width', '24%');
 
@@ -220,26 +220,19 @@ $(document).on('click', "#crush-once-btn", function(evt)
   if (crushable_len != 0) 
   {
     rules.removeCrushes(crushable);
-    $("#move-input").focus();
+    $('#move-input').focus();
   }
 });
 
-//Button Events with keystrokes
-$(document).on('keypress', function(e) {
-   console.log(e.keyCode);
-  if(e.keyCode == 32)
-    $( "#crush-once-btn" ).trigger( "click" );
-  else if(e.keyCode == 78)
-    $( "#new-game-btn" ).trigger( "click" );
-});
+
 
 
 $(document).on('click', ".arrow-btn", function(evt)
 {
-    var row = annot_num;
-    var column= annot_alph.charCodeAt()-"a".charCodeAt();
-    if(rules.isMoveTypeValid(board.getCandyAt(row, column), this.id) > 0 ) //if it is valid
-      board.flipCandies(board.getCandyAt(row, column), board.getCandyInDirection(board.getCandyAt(row, column), this.id));
+  var row = annot_num;
+  var column= annot_alph.charCodeAt()-"a".charCodeAt();
+  if(rules.isMoveTypeValid(board.getCandyAt(row, column), this.id) > 0 ) //if it is valid
+    board.flipCandies(board.getCandyAt(row, column), board.getCandyInDirection(board.getCandyAt(row, column), this.id));
 
   //clear text field
   $('#move-input').val('');
@@ -255,6 +248,20 @@ $(document).on('keyup', function(evt) {
   var btns = ['up','down','right','left'];
   var cellAnnot = $('#move-input').val();
   console.log(cellAnnot);
+
+  if(evt.keyCode == 32)
+  {
+    $('#crush-once-btn').trigger( "click" );
+    $('#move-input').val('');
+    return;
+  }
+  
+  else if(evt.keyCode == 78)
+  {
+    $('#new-game-btn').trigger( "click" );
+
+  }
+
   ////input checking
   if(cellAnnot !='' && cellAnnot.length ==2){
   // 2nd input checking

@@ -29,11 +29,10 @@
 	font-weight: bold;
 }
 
-#game-board {
+#game-board{
 	height: 320px;
     width: 320px;
     margin: 0 auto;
-    
 }
 
 #game-board td{
@@ -71,10 +70,6 @@
 
 #name-text{
 	display:inline;
-}
-
-.input-append .btn.dropdown-toggle {
-    float: none;
 }
 
 #arrow-set{
@@ -120,4 +115,8 @@
 
 #crush-once-btn:not([disabled]){
 	background:lightblue;
+}
+
+.btn{
+	background-color:lightgray;
 }
