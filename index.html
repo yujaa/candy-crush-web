@@ -1,7 +1,7 @@
 <!--
 CandyCrush
-Your Name:
-Collaborators:
+Your Name: Ja Eun Yu
+Collaborators: Li Chen
 -->
 <!DOCTYPE html>
 <html>
@@ -73,6 +73,7 @@ var annot_alph;
 var annot_num;
 var crushable_len;
 
+
 // initialize board
 if ($.getUrlVar('size') && $.getUrlVar('size') >= 3) {
   board = new Board($.getUrlVar('size'));
@@ -90,11 +91,13 @@ $(document).ready(function()
   // Your code here.
   //make the middle column 50% of the page.
   $('#mainColumn').css('min-width', '50%'); 
+  $('#firstColumn').css('min-width', '180px'); 
+  $('#lastColumn').css('min-width', '180px');
   $('#firstColumn').css('max-width', '25%'); 
   $('#lastColumn').css('max-width', '25%');
 
   //Create 8*8 table 
-  $('#mainColumn').append("<table id='game-board'>");
+  $('#board-div').append("<table id='game-board'>");
 
   for(i = 0; i < 8; i++){
     var tableString ="<tr>";
@@ -120,12 +123,11 @@ $(document).ready(function()
 // add a candy to the board
 $(board).on('add', function(e, info)
 {
-  console.log(crushable_len);
   if(crushable_len > 0){
     //sleep function
-    var start = new Date().getTime();
+    var startTime = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > 500){
+      if ((new Date().getTime() - startTime) > 500){
         break;
       }
     }
@@ -185,12 +187,30 @@ $(board).on('scoreUpdate', function(e, info)
 });
 
 // Button Events
+
+$(document).on('click', "#name-input-btn", function(evt)
+{
+  if(this.value=='OK'){
+    $('#name-input').hide();
+    $('#name-text').text($('#name-input').val());
+    $('#name-text').show();
+    $('#name-input-btn').prop('value','Edit');
+  }
+  else{
+    $('#name-text').hide();
+    $('#name-input').text($('#name-input').val());
+    $('#name-input').show();
+    $('#name-input-btn').prop('value','OK');
+  }
+});
+
 $(document).on('click', "#new-game-btn", function(evt)
 {
   board.clear();
   rules.prepareNewGame();
   console.log("new");
 });
+
 
 $(document).on('click', "#crush-once-btn", function(evt)
 {
@@ -199,6 +219,15 @@ $(document).on('click', "#crush-once-btn", function(evt)
 
   if (crushable_len != 0) 
     rules.removeCrushes(crushable);
+});
+
+//Button Events with keystrokes
+$(document).on('keypress', function(e) {
+   console.log(e.keyCode);
+  if(e.keyCode == 32)
+    $( "#crush-once-btn" ).trigger( "click" );
+  else if(e.keyCode == 78)
+    $( "#new-game-btn" ).trigger( "click" );
 });
 
 
@@ -255,14 +284,19 @@ $(document).on('keyup', function(evt) {
     $('.arrow-btn').prop('disabled', true);
   }
 });
-
-
 </script>
 
 
 </head>
-
 <body>
+
+  <div id = "name-input-div">
+    <label for="name-input" id="name-input-label">Name:</label>
+    <input class="form-control" type="text" id="name-input" autocomplete="on">
+    <div id="name-text" style="display: none;"> </div>
+    <input class= "btn" id ="name-input-btn" type="button" value="OK">
+  </div>
+
 
 <div class="container">
   <div class="row">
@@ -276,6 +310,13 @@ $(document).on('keyup', function(evt) {
 
     <div class="col-md-4" id="mainColumn">
       <!-- Column 2 Code Here -->
+      <div id ="board-div">
+      </div>
+      <p style="margin-top:10px; text-align: center;">
+        <b>[If you want to use a keyboard]</b> </br>
+        Press <i>'Enter'</i> to Crush Once,</br>
+        Press <i>'n'</i> to start New Game.
+      </p>
     </div>
 
     <div class="col-md-4" id="lastColumn">

@@ -20,7 +20,7 @@
 	font-size: 28px;
 	font-weight: bold;
 	text-align: center;
-	padding-top: 100px;
+	padding-top: 60px;
 }
 
 #new-game-btn {
@@ -55,6 +55,26 @@
 #move-input{
 	width: 80px;
 	display: inline;
+}
+
+#name-input-div{
+	margin-top: 20px;
+	text-align: center;
+	font-weight: bolder;
+
+}
+
+#name-input{
+	width: 130px;
+	display: inline;
+}
+
+#name-text{
+	display:inline;
+}
+
+.input-append .btn.dropdown-toggle {
+    float: none;
 }
 
 #arrow-set{
